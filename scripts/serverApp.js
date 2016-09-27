@@ -11,7 +11,7 @@ function build(request, response)
     log = '';
     branch = request.params.branch;
 	var child = exec(cmd + branch, {maxBuffer: 1024 * 5000}, function(error, stdout, stderr) {
-	    is_success = true;
+    is_success = is_success(log);
 		if( error ) {
 		    is_success = false;
 		    console.log(error);
@@ -82,6 +82,10 @@ function format_ts(time_stamp) {
     d = new Date(time_stamp);
     return d.getMonth() + "/" + d.getDate() + "/" + d.getFullYear() +
      " "+ d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()
+}
+
+function is_success(log) {
+  return log.includes("[INFO] BUILD SUCCESS");
 }
 
 app.use('/static', express.static(__dirname + '/files'));
