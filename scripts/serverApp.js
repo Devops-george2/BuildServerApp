@@ -11,7 +11,7 @@ function build(request, response)
     log = '';
     branch = request.params.branch;
 	var child = exec(cmd + branch, {maxBuffer: 1024 * 5000}, function(error, stdout, stderr) {
-    is_success = is_success(log);
+    is_success = isSuccess(log);
 		if( error ) {
 		    is_success = false;
 		    console.log(error);
@@ -84,7 +84,7 @@ function format_ts(time_stamp) {
      " "+ d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()
 }
 
-function is_success(log) {
+function isSuccess(log) {
   return log.includes("[INFO] BUILD SUCCESS");
 }
 
