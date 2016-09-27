@@ -1,0 +1,24 @@
+#!/bin/sh
+
+
+URL="http://localhost:3000/deploy/"
+echo "Performing Build"
+while read oldrev newrev refname
+do
+    branch=$(git rev-parse --symbolic --abbrev-ref $refname)
+    #remote=$(pwd)
+    #unset GIT_WORK_TREE
+    #git clone $remote
+    #echo "BRANCH"
+    #echo $branch
+    #cd JavaTest
+    #echo $(pwd)
+    #sh scripts/build.sh $branch $remote
+    echo "$URL$branch"
+    open "$URL$branch"
+    #cd ..
+    #rm -rf JavaTest
+done
+
+
+
