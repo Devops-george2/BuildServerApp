@@ -17,7 +17,7 @@ const smtpTransport = nodemailer.createTransport("SMTP",{
     }
 });
 var mailOptions = {
-    from: '"Fred Foo ?" <foo@blurdybloop.com>', // sender address
+    from: `${config.user} <${config.email}>`, // sender address
     to: send_mail_ids, // list of receivers
     subject: 'Build Report : ', // Subject line
     html: 'Check the results at <a href="http://localhost:3000">here</a>.', // plaintext body
