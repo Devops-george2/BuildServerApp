@@ -1,0 +1,45 @@
+master
+M	.gitignore
+M	scripts/build.sh
+A	scripts/serverApp.js
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building JavaTest 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ JavaTest ---
+[INFO] Deleting /Users/panzer/NCSU/DevOps/milestones/m1/JavaTest/target
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ JavaTest ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 0 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.3.2:compile (default-compile) @ JavaTest ---
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 1 source file to /Users/panzer/NCSU/DevOps/milestones/m1/JavaTest/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ JavaTest ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /Users/panzer/NCSU/DevOps/milestones/m1/JavaTest/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.3.2:testCompile (default-testCompile) @ JavaTest ---
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 1 source file to /Users/panzer/NCSU/DevOps/milestones/m1/JavaTest/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ JavaTest ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ JavaTest ---
+[INFO] Building jar: /Users/panzer/NCSU/DevOps/milestones/m1/JavaTest/target/JavaTest-1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ JavaTest ---
+[INFO] Installing /Users/panzer/NCSU/DevOps/milestones/m1/JavaTest/target/JavaTest-1.0-SNAPSHOT.jar to /Users/panzer/.m2/repository/JavaTest/JavaTest/1.0-SNAPSHOT/JavaTest-1.0-SNAPSHOT.jar
+[INFO] Installing /Users/panzer/NCSU/DevOps/milestones/m1/JavaTest/pom.xml to /Users/panzer/.m2/repository/JavaTest/JavaTest/1.0-SNAPSHOT/JavaTest-1.0-SNAPSHOT.pom
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 2.043 s
+[INFO] Finished at: 2016-09-26T18:40:59-04:00
+[INFO] Final Memory: 22M/322M
+[INFO] ------------------------------------------------------------------------
