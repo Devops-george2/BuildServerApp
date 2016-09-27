@@ -7,7 +7,7 @@ const config = require('./config.js');
 
 const cmd = 'sh scripts/build.sh ';
 const port = 3000;
-const send_mail_ids = "george2@ncsu.edu, george.meg91@gmail.com";
+const send_mail_ids = "george2@ncsu.edu, wfu@ncsu.edu";
 
 const smtpTransport = nodemailer.createTransport("SMTP",{
     service: "Gmail",
