@@ -38,4 +38,4 @@ jspm_packages
 scripts/node_modules
 scripts/reports.json
 scripts/files/
-
+scripts/config.js

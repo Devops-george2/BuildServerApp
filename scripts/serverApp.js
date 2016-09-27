@@ -2,58 +2,88 @@ const express = require('express');
 const app = express();
 const exec = require('child_process').exec;
 const fs = require('fs');
+const nodemailer = require("nodemailer");
+const config = require('./config.js');
 
 const cmd = 'sh scripts/build.sh ';
-var port = 3000
+const port = 3000;
+const send_mail_ids = "george2@ncsu.edu, george.meg91@gmail.com";
 
-function build(request, response)
-{
+const smtpTransport = nodemailer.createTransport("SMTP",{
+    service: "Gmail",
+    auth: {
+        user: config.email,
+        pass: config.password
+    }
+});
+var mailOptions = {
+    from: '"Fred Foo ?" <foo@blurdybloop.com>', // sender address
+    to: send_mail_ids, // list of receivers
+    subject: 'Build Report : ', // Subject line
+    html: 'Check the results at <a href="http://localhost:3000">here</a>.', // plaintext body
+};
+
+
+
+function build(request, response) {
     log = '';
     branch = request.params.branch;
-	var child = exec(cmd + branch, {maxBuffer: 1024 * 5000}, function(error, stdout, stderr) {
-    is_success = isSuccess(log);
-		if( error ) {
-		    is_success = false;
-		    console.log(error);
-		    console.log("ERROR");
-		}
-		time_stamp = new Date().getTime();
-		directory = "scripts/files";
-		file_name = directory+"/"+time_stamp+".txt";
-		checkDirectory(directory, function(dir_err) {
-		    if(dir_err) {
-                console.error("Error while creating directory!!!", dir_err);
-                return;
-            }
-            fs.writeFile(file_name, log, function(err) {
-                if(err) {
-                    return console.log(err);
+	  var child = exec(cmd + branch, {maxBuffer: 1024 * 5000}, function(error, stdout, stderr) {
+        is_success = isSuccess(log);
+    		if( error ) {
+    		    is_success = false;
+    		    console.log(error);
+    		    console.log("ERROR");
+    		}
+    		time_stamp = new Date().getTime();
+    		directory = "scripts/files";
+    		file_name = directory+"/"+time_stamp+".txt";
+    		checkDirectory(directory, function(dir_err) {
+    		    if(dir_err) {
+                    console.error("Error while creating directory!!!", dir_err);
+                    return;
                 }
-                console.log(`The file ${file_name} was saved!`);
-            });
-            fs.readFile('scripts/reports.json', 'utf8', function(err, data) {
-                if (err) {
-                    data = [];
-                } else {
-                    data = JSON.parse(data);
-                }
-                record = {
-                    'file_name': file_name.split(/\/(.+)?/)[1],
-                    'branch': branch,
-                    'is_success' : is_success,
-                    'time_stamp': time_stamp
-                };
-                data.unshift(record);
-                fs.writeFile('scripts/reports.json', JSON.stringify(data), function(err, data){
+                fs.writeFile(file_name, log, function(err) {
                     if(err) {
-                        console.log(err);
+                        return console.log(err);
+                    }
+                    console.log(`The file ${file_name} was saved!`);
+                });
+                fs.readFile('scripts/reports.json', 'utf8', function(err, data) {
+                    if (err) {
+                        data = [];
                     } else {
-                        console.log("The file scripts/reports.json was saved!");
+                        data = JSON.parse(data);
+                    }
+                    record = {
+                        'file_name': file_name.split(/\/(.+)?/)[1],
+                        'branch': branch,
+                        'is_success' : is_success,
+                        'time_stamp': time_stamp
+                    };
+                    data.unshift(record);
+                    fs.writeFile('scripts/reports.json', JSON.stringify(data), function(err, data){
+                        if(err) {
+                            console.log(err);
+                        } else {
+                            console.log("The file scripts/reports.json was saved!");
+                        }
+                    });
+                });
+                if (is_success) {
+                  mailOptions.subject += "SUCCESS";
+                } else {
+                  mailOptions.subject += "Failure";
+                }
+                smtpTransport.sendMail(mailOptions, function(error, response){
+                    if(error){
+                        console.log(error);
+                    }else{
+                        console.log("Message sent: " + response.message);
                     }
                 });
-            });
-		});
-	});
+    		});
+    });
 
 	// Stream results
 
