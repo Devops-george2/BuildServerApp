@@ -1,7 +1,7 @@
 #!/bin/sh
 
 
-URL="http://localhost:3000/deploy/"
+URL="<APP URL>/deploy/"
 echo "Performing Build"
 while read oldrev newrev refname
 do
